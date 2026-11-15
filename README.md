@@ -28,8 +28,6 @@ Working on DiscordRPC · 6.0k tokens
 Coding with DeepSeek V4.1 Flash · $0.42
 ```
 
-- **Large image:** the OpenChamber logo asset (uploaded to your Discord app).
-- **Large image text:** `OpenChamber AI Coding`.
 - **Details:** `Working on <project> · <tokens>`, or your custom activity text
   with the same token suffix.
 - **State:** `Coding with <model>`, `Idle · <model>`, or `Using OpenChamber`, with
@@ -51,8 +49,6 @@ the project, model, tokens or cost removes that part instead of inventing one.
 - OpenChamber **2.7.1 or newer**.
 - The **Discord desktop client** running on the same machine as the OpenChamber
   server (the normal desktop app setup).
-- The OpenChamber Discord application. Its ID is built into the extension
-  (`1571334059324477440`); there is no app-ID setting in the panel.
 - Extensions load in OpenChamber web/desktop. VS Code and the mobile apps do not
   load extension services, so the presence service does not run there.
 
@@ -67,29 +63,9 @@ the project, model, tokens or cost removes that part instead of inventing one.
      project directory, model id, session timing, and aggregate token/cost usage.
 4. Open the **Discord Rich Presence** icon in the OpenChamber rail. The panel shows
    whether Discord and session metadata are connected.
-5. If this is the first time, do the one-time Discord app setup below.
 
 The extension has `keepRunning: true`: after approval, the service starts with
 OpenChamber and keeps the presence up even when the panel is closed.
-
-### One-time Discord app setup
-
-Discord Rich Presence uses the **application** you created in the
-[Discord Developer Portal](https://discord.com/developers/applications). The app's
-name and icon are displayed by Discord and cannot be changed by an RPC client, so
-set them once in the portal:
-
-1. Open the app with ID `1571334059324477440` (or your own app).
-2. On **General Information**, rename it to **OpenChamber** if it is still named
-   `openchamber`, and upload `assets/openchamber-app-icon-1024.png` as the app icon.
-3. Open **Rich Presence → Art Assets** and upload
-   `assets/discord-asset-openchamber.png` with the key **`openchamber`**.
-   The key is built into the extension; upload it exactly as written.
-
-If the asset is missing, the text presence still shows. When Discord rejects the
-key, the service retries without the image and the panel shows a warning; some
-Discord versions silently ignore an unknown key instead. The logo appears only
-after the asset is uploaded under the matching key.
 
 ## Settings
 
@@ -113,10 +89,6 @@ becomes `Building MyGame with`. Tokens are otherwise added after the project
 line and cost after the model line. If custom text contains `{tokens}` or
 `{cost}`, that stat is not added automatically, so the placeholders let you
 choose exactly where it appears.
-
-The Discord application ID, the `openchamber` large-image asset key, and the
-`OpenChamber AI Coding` large-image text are built into the extension and are not
-configurable from the panel.
 
 ## How it works
 
