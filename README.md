@@ -157,8 +157,6 @@ never resent.
 - **Same machine:** the service runs on the OpenChamber server. If you use a
   remote OpenChamber server, the service dials Discord on the server, not on your
   laptop. Use the extension with a local desktop OpenChamber server.
-- **Discord app name and icon** must be set in the Developer Portal; RPC cannot
-  change them.
 - **Multiple running sessions:** the panel is the authoritative "what am I
   looking at" signal. Without it, the service follows an explicit chat view or a
   turn that starts while the shown session is idle; a background turn does not
@@ -174,11 +172,7 @@ never resent.
   no cost.
 - **Platform coverage:** Linux with the official Discord client is tested
   end-to-end. macOS and Windows socket discovery follow the documented paths but
-  were not exercised in this environment. If discovery fails, set the Discord IPC
-  socket override in **Settings → Extensions** (Advanced on the extension card).
-- **Asset upload** is a portal step; the logo file is included but cannot be
-  uploaded without your developer credentials.
-- Discord may cache a profile card for a few seconds after an update.
+  were not exercised in this environment.
 
 ## Development
 
@@ -234,12 +228,6 @@ build uses another path, set the override on the extension card in
 The extension was installed without the `opencode` read grant, or the grant was
 withdrawn. Re-approve it in **Settings → Extensions**. Presence still works with
 fallback text, and the open panel can supply the current project/model.
-
-**The image is missing, or "Discord rejected the image"**
-Upload `assets/discord-asset-openchamber.png` as the `openchamber` asset in the
-Developer Portal. The key is fixed in the extension. The text presence continues;
-some Discord versions ignore an unknown key without an error, so the panel's
-preview is the best confirmation that the asset key is configured.
 
 **"Service offline"**
 Reopen the panel, or re-approve/enable the extension. The service's stdout/stderr
