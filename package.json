@@ -1,0 +1,81 @@
+{
+  "name": "openchamber-discord-rpc",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "description": "Show what you are building in OpenChamber, and the model you are coding with, on your Discord profile.",
+  "openchamber": {
+    "apiVersion": 1,
+    "engines": {
+      "openchamber": ">=2.7.1"
+    },
+    "id": "openchamber-discord-rpc",
+    "name": "Discord Rich Presence",
+    "icon": "discord-fill",
+    "contributes": {
+      "panel": {
+        "id": "openchamber-discord-rpc",
+        "name": "Discord Rich Presence",
+        "icon": "discord-fill",
+        "entry": "panel/index.html"
+      },
+      "attach": false,
+      "service": {
+        "entry": "service/main.js",
+        "runtime": "host",
+        "provides": [
+          "opencode"
+        ],
+        "keepRunning": true,
+        "permissions": {
+          "sockets": [
+            {
+              "id": "discord-ipc",
+              "candidates": {
+                "linux": [
+                  "~/.config/discord/discord-ipc-0",
+                  "~/.config/discordcanary/discord-ipc-0",
+                  "/tmp/discord-ipc-0"
+                ],
+                "darwin": [
+                  "~/Library/Application Support/discord/discord-ipc-0",
+                  "/tmp/discord-ipc-0"
+                ],
+                "win32": [
+                  "\\\\.\\pipe\\discord-ipc-0"
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "sessionEvents": {
+        "events": [
+          "turn-started",
+          "turn-finished",
+          "turn-failed",
+          "session-created",
+          "session-archived",
+          "session-deleted"
+        ]
+      }
+    }
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "build:dev": "node scripts/build.mjs --dev",
+    "package": "node scripts/build.mjs && node scripts/package.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "npm run build && node --experimental-strip-types --test tests/*.test.ts",
+    "test:unit": "node --experimental-strip-types --test tests/*.test.ts",
+    "check": "npm run typecheck && npm run test",
+    "dev:service": "npm run build && node scripts/dev-service.mjs"
+  },
+  "devDependencies": {
+    "@openchamber/sdk": "2.7.1",
+    "@types/node": "24.19.2",
+    "esbuild": "0.28.2",
+    "typescript": "5.9.3"
+  }
+}

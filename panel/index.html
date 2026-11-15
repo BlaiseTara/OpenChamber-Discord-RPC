@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en" data-oc-surface="panel">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Discord Rich Presence</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="top">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="-50 -50 100 100" fill="none">
+              <path d="M-41.568 -24 L-41.568 24 L0 0 Z" fill="currentColor" fill-opacity=".12" />
+              <path d="M41.568 -24 L0 0 L41.568 24 Z" fill="currentColor" fill-opacity=".16" />
+              <path d="M0 -48 L41.568 -24 L0 0 L-41.568 -24 Z" fill="currentColor" fill-opacity=".08" />
+              <path d="M0 -43.2 L33.254 -24 L0 -4.8 L-33.254 -24 Z" fill="currentColor" fill-opacity=".22" />
+              <path d="M0 -37.92 L24.109 -24 L0 -10.08 L-24.109 -24 Z" fill="currentColor" fill-opacity=".27" />
+              <path d="M0 -32.64 L14.964 -24 L0 -15.36 L-14.964 -24 Z" fill="currentColor" fill-opacity=".85" />
+              <g stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round">
+                <path d="M0 -48 L-41.568 -24 L0 0 L41.568 -24 Z" />
+                <path d="M-41.568 -24 L-41.568 24 L0 48 L41.568 24 L41.568 -24" />
+                <path d="M0 0 L0 48" />
+              </g>
+            </svg>
+          </span>
+          <div>
+            <h1>Discord Rich Presence</h1>
+            <p class="lede">Show what you're building in OpenChamber.</p>
+          </div>
+        </div>
+        <span id="discord-badge" class="badge muted">Starting…</span>
+      </header>
+
+      <div id="banner" class="banner" role="status" hidden>
+        <div class="banner-copy">
+          <strong id="banner-title"></strong>
+          <span id="banner-text"></span>
+        </div>
+        <button id="banner-action" class="btn tiny" type="button" hidden>Try again</button>
+        <button id="banner-close" class="icon-btn" type="button" aria-label="Dismiss">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" /></svg>
+        </button>
+      </div>
+
+      <section class="preview" aria-label="Discord profile preview">
+        <div class="preview-card">
+          <div class="preview-head">
+            <span class="preview-art" aria-hidden="true">
+              <svg viewBox="-50 -50 100 100" fill="none">
+                <path d="M-41.568 -24 L-41.568 24 L0 0 Z" fill="currentColor" fill-opacity=".12" />
+                <path d="M41.568 -24 L0 0 L41.568 24 Z" fill="currentColor" fill-opacity=".16" />
+                <path d="M0 -48 L41.568 -24 L0 0 L-41.568 -24 Z" fill="currentColor" fill-opacity=".08" />
+                <path d="M0 -43.2 L33.254 -24 L0 -4.8 L-33.254 -24 Z" fill="currentColor" fill-opacity=".22" />
+                <path d="M0 -37.92 L24.109 -24 L0 -10.08 L-24.109 -24 Z" fill="currentColor" fill-opacity=".27" />
+                <path d="M0 -32.64 L14.964 -24 L0 -15.36 L-14.964 -24 Z" fill="currentColor" fill-opacity=".85" />
+                <g stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round">
+                  <path d="M0 -48 L-41.568 -24 L0 0 L41.568 -24 Z" />
+                  <path d="M-41.568 -24 L-41.568 24 L0 48 L41.568 24 L41.568 -24" />
+                  <path d="M0 0 L0 48" />
+                </g>
+              </svg>
+            </span>
+            <div class="preview-meta">
+              <span class="preview-eyebrow">Playing</span>
+              <span class="preview-app">OpenChamber</span>
+            </div>
+            <span id="preview-hidden-pill" class="preview-pill" hidden>Hidden</span>
+          </div>
+          <div class="preview-body">
+            <div id="preview-details" class="preview-details">OpenChamber AI Coding</div>
+            <div id="preview-state" class="preview-state">Ready</div>
+            <div id="preview-time" class="preview-time" hidden>
+              <span class="preview-dot" aria-hidden="true"></span>
+              <span id="preview-elapsed">0:00 elapsed</span>
+            </div>
+          </div>
+        </div>
+        <p id="preview-note" class="preview-note">This is what Discord shows on your profile.</p>
+      </section>
+
+      <section class="card">
+        <div class="row">
+          <div class="row-copy">
+            <label for="enabled">Discord Rich Presence</label>
+            <p>Show your activity while OpenChamber is open.</p>
+          </div>
+          <label class="switch">
+            <input id="enabled" data-setting="enabled" type="checkbox" />
+            <span aria-hidden="true"></span>
+          </label>
+        </div>
+        <div class="row">
+          <div class="row-copy">
+            <label for="showProject">Show project name</label>
+            <p>Use the folder name of the session's project.</p>
+          </div>
+          <label class="switch">
+            <input id="showProject" data-setting="showProject" type="checkbox" />
+            <span aria-hidden="true"></span>
+          </label>
+        </div>
+        <div class="row">
+          <div class="row-copy">
+            <label for="showModel">Show model name</label>
+            <p>Show the model the current session uses.</p>
+          </div>
+          <label class="switch">
+            <input id="showModel" data-setting="showModel" type="checkbox" />
+            <span aria-hidden="true"></span>
+          </label>
+        </div>
+        <div class="row">
+          <div class="row-copy">
+            <label for="showElapsed">Show elapsed session time</label>
+            <p>Start the timer when the current session was created.</p>
+          </div>
+          <label class="switch">
+            <input id="showElapsed" data-setting="showElapsed" type="checkbox" />
+            <span aria-hidden="true"></span>
+          </label>
+        </div>
+        <div class="row">
+          <div class="row-copy">
+            <label for="showTokens">Show session tokens</label>
+            <p>Adds generated tokens after the project line, or use <code>{tokens}</code>.</p>
+          </div>
+          <label class="switch">
+            <input id="showTokens" data-setting="showTokens" type="checkbox" />
+            <span aria-hidden="true"></span>
+          </label>
+        </div>
+        <div class="row">
+          <div class="row-copy">
+            <label for="showCost">Show session cost</label>
+            <p>Adds the session's USD cost to the model line, or use <code>{cost}</code>.</p>
+          </div>
+          <label class="switch">
+            <input id="showCost" data-setting="showCost" type="checkbox" />
+            <span aria-hidden="true"></span>
+          </label>
+        </div>
+        <div class="row">
+          <div class="row-copy">
+            <label for="clearWhenIdle">Clear presence when idle</label>
+            <p>Hide the card 45 seconds after the session stops working.</p>
+          </div>
+          <label class="switch">
+            <input id="clearWhenIdle" data-setting="clearWhenIdle" type="checkbox" />
+            <span aria-hidden="true"></span>
+          </label>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="section-head">
+          <h2>Text</h2>
+          <span class="save-state" id="save-state">Saved</span>
+        </div>
+        <label class="field">
+          <span>Custom activity text</span>
+          <input
+            data-setting="customActivity"
+            type="text"
+            maxlength="128"
+            autocomplete="off"
+            spellcheck="false"
+            placeholder="Working on {project}"
+          />
+          <small>Overrides the “Working on …” line. Placeholders: <code>{project}</code>, <code>{model}</code>, <code>{tokens}</code>, <code>{cost}</code>, <code>{app}</code>.</small>
+        </label>
+        <label class="field">
+          <span>Fallback text</span>
+          <input
+            data-setting="fallbackText"
+            type="text"
+            maxlength="128"
+            autocomplete="off"
+            spellcheck="false"
+            placeholder="OpenChamber AI Coding"
+          />
+          <small>Used when no project is open, or when a line is hidden.</small>
+        </label>
+      </section>
+
+      <div class="status-strip">
+        <span id="opencode-badge" class="badge muted">Session sync</span>
+        <div class="actions">
+          <button id="refresh" class="btn tiny" type="button">Refresh</button>
+          <button id="reconnect" class="btn tiny" type="button">Reconnect</button>
+        </div>
+      </div>
+
+      <details class="card diagnostics" id="diagnostics">
+        <summary><span>Troubleshooting</span><span id="version" class="muted-text"></span></summary>
+        <dl class="diag-list">
+          <dt>Discord</dt>
+          <dd id="diag-discord">—</dd>
+          <dt>OpenCode events</dt>
+          <dd id="diag-opencode">—</dd>
+          <dt>Current session</dt>
+          <dd id="diag-session">—</dd>
+          <dt>Session usage</dt>
+          <dd id="diag-usage">—</dd>
+          <dt>Last error</dt>
+          <dd id="diag-error">None</dd>
+        </dl>
+        <p class="hint">
+          Discord must be running on the same machine as the OpenChamber server. The
+          extension reconnects automatically when Discord restarts.
+        </p>
+      </details>
+
+      <footer class="privacy">
+        <strong>Private by design.</strong> Only the project name, model name, and session
+        timing are sent to your local Discord client. Prompts, replies, code, and file
+        contents never leave OpenChamber.
+      </footer>
+    </main>
+    <script src="./main.js"></script>
+  </body>
+</html>
